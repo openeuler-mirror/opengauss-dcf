@@ -19,7 +19,9 @@ DCF is A distributed consensus framework library for openGauss
 %prep
 %setup -q
 %patch1 -p1
+%ifarch sw_64
 %patch1 -p2
+%endif
 
 %build
 cmake -DCMAKE_BUILD_TYPE=Release -DUSE32BIT=OFF -DTEST=OFF -DENABLE_EXPORT_API=OFF CMakeLists.txt
