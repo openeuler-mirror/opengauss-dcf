@@ -1,6 +1,6 @@
 Name:             DCF
 Version:          1.0.0
-Release:          3
+Release:          4
 Summary:          A distributed consensus framework library
 License:          MulanPSL-2.0
 URL:              https://gitee.com/opengauss/DCF
@@ -30,9 +30,17 @@ cmake -DCMAKE_BUILD_TYPE=Release -DUSE32BIT=OFF -DTEST=OFF -DENABLE_EXPORT_API=O
 
 %install
 mkdir -p %{buildroot}/%{_prefix}/include
+%ifarch sw_64
+mkdir -p %{buildroot}/%{_prefix}/lib
+%else
 mkdir -p %{buildroot}/%{_prefix}/lib64
+%endif
 cp src/interface/dcf_interface.h %{buildroot}/%{_prefix}/include
+%ifarch sw_64
+cp output/lib/libdcf.* %{buildroot}/%{_prefix}/lib
+%else
 cp output/lib/libdcf.* %{buildroot}/%{_prefix}/lib64
+%endif
 
 %post
 
@@ -41,9 +49,16 @@ cp output/lib/libdcf.* %{buildroot}/%{_prefix}/lib64
 %files
 %defattr (-,root,root)
 %{_prefix}/include/dcf_interface.h
+%ifarch sw_64
+%{_prefix}/lib/libdcf.so
+%else
 %{_prefix}/lib64/libdcf.so
+%endif
 
 %changelog
+* Mon Oct 24 2022 wuzx<wuzx1226@qq.com> - 1.0.0-4
+- change lib64 to lib when in sw64 architecture
+
 * Thu Jul 28 2022 wuzx<wuzx1226@qq.com> - 1.0.0-3
 - add sw64 patch
 
