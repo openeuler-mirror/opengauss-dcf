@@ -1,0 +1,41 @@
+Only in DCF-1.0.0: cmakelist2.txt
+diff -u -r DCF-1.0.0/CMakeLists.txt DCF-1.0.0/CMakeLists.txt
+--- DCF-1.0.0/CMakeLists.txt	2021-11-30 11:22:45.000000000 +0800
++++ DCF-1.0.0/CMakeLists.txt	2023-05-04 18:39:04.000000000 +0800
+@@ -50,7 +50,9 @@
+     set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -g -ldl -pthread -Wl,-z,noexecstack -Wl,-z,relro -Wl,-z,now")
+     add_compile_options(-fno-common)
+     add_compile_options(-Wtrampolines)
+-    add_compile_options(-freg-struct-return)
++		if(CMAKE_C_COMPILER_ID STREQUAL "GNU")
++				add_compile_options(-freg-struct-return)
++		endif()
+     add_compile_options(-pipe)
+     add_compile_options(-Wl,-Bsymbolic)
+     add_compile_options(-rdynamic)
+@@ -106,4 +108,4 @@
+ OPTION(TEST "option for test module" ON)
+ if (TEST)
+     add_subdirectory(test)
+-endif()
+\ No newline at end of file
++endif()
+Only in DCF-1.0.0/.git: FETCH_HEAD
+Binary files DCF-1.0.0/.git/index and DCF-1.0.0/.git/index differ
+Only in DCF-1.0.0/.git/logs/refs/remotes/origin: 2.0.0
+Only in DCF-1.0.0/.git/logs/refs/remotes/origin: 3.0.0
+Only in DCF-1.0.0/.git/logs/refs/remotes/origin: 3.1.0
+Only in DCF-1.0.0/.git/logs/refs/remotes/origin: 5.0.0
+Only in DCF-1.0.0/.git/logs/refs/remotes/origin: master
+Only in DCF-1.0.0/.git/objects/pack: pack-18ae05a5b02e4d8e1a6e8e36003bc11c7eda52be.idx
+Only in DCF-1.0.0/.git/objects/pack: pack-18ae05a5b02e4d8e1a6e8e36003bc11c7eda52be.pack
+Only in DCF-1.0.0/.git/refs/remotes/origin: 2.0.0
+Only in DCF-1.0.0/.git/refs/remotes/origin: 3.0.0
+Only in DCF-1.0.0/.git/refs/remotes/origin: 3.1.0
+Only in DCF-1.0.0/.git/refs/remotes/origin: 5.0.0
+Only in DCF-1.0.0/.git/refs/remotes/origin: master
+Only in DCF-1.0.0/.git/refs/tags: v3.0.0
+Only in DCF-1.0.0/.git/refs/tags: v3.0.2
+Only in DCF-1.0.0/.git/refs/tags: v3.1.0
+Only in DCF-1.0.0/.git/refs/tags: v3.1.1
+Only in DCF-1.0.0/.git/refs/tags: v5.0.0
