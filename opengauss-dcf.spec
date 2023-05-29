@@ -1,6 +1,6 @@
 Name:             DCF
 Version:          1.0.0
-Release:          4
+Release:          5
 Summary:          A distributed consensus framework library
 License:          MulanPSL-2.0
 URL:              https://gitee.com/opengauss/DCF
@@ -8,6 +8,7 @@ Source0:          %{name}-%{version}.tar.gz
 
 Patch1:           01-boundcheck.patch
 Patch2:           DCF-1.0.0-sw.patch
+Patch3:           fix-clang.patch
 
 BuildRequires: cmake gcc gcc-c++ lz4-devel openssl-devel zstd-devel libboundscheck cjson-devel
 
@@ -22,8 +23,13 @@ DCF is A distributed consensus framework library for openGauss
 %ifarch sw_64
 %patch2 -p1
 %endif
+%patch3 -p1
 
 %build
+%if "%toolchain" == "clang"
+	export CFLAGS="$CFLAGS -Wno-error=null-dereference -Wno-error=format-security"
+	export CXXFLAGS="$CXXFLAGS -Wno-error=null-dereference -Wno-error=format-security"
+%endif
 cmake -DCMAKE_BUILD_TYPE=Release -DUSE32BIT=OFF -DTEST=OFF -DENABLE_EXPORT_API=OFF CMakeLists.txt
 %make_build all -s %{?_smp_mflags}
 
@@ -56,6 +62,9 @@ cp output/lib/libdcf.* %{buildroot}/%{_prefix}/lib64
 %endif
 
 %changelog
+* Thu May 25 2023 yoo <sunyuechi@iscas.ac.cn> - 1.0.0-5
+- fix clang build error
+
 * Mon Oct 24 2022 wuzx<wuzx1226@qq.com> - 1.0.0-4
 - change lib64 to lib when in sw64 architecture
 
