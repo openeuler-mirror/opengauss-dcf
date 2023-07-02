@@ -1,6 +1,6 @@
 Name:             DCF
 Version:          1.0.0
-Release:          5
+Release:          6
 Summary:          A distributed consensus framework library
 License:          MulanPSL-2.0
 URL:              https://gitee.com/opengauss/DCF
@@ -9,6 +9,7 @@ Source0:          %{name}-%{version}.tar.gz
 Patch1:           01-boundcheck.patch
 Patch2:           DCF-1.0.0-sw.patch
 Patch3:           fix-clang.patch
+Patch4:           add-riscv-support.patch
 
 BuildRequires: cmake gcc gcc-c++ lz4-devel openssl-devel zstd-devel libboundscheck cjson-devel
 
@@ -62,6 +63,9 @@ cp output/lib/libdcf.* %{buildroot}/%{_prefix}/lib64
 %endif
 
 %changelog
+* Sun Jul 2  2023 zhangxiang <zhangxiang@iscas.ac.cn> - 1.0.0-6
+- add riscv64 support
+
 * Thu May 25 2023 yoo <sunyuechi@iscas.ac.cn> - 1.0.0-5
 - fix clang build error
 
