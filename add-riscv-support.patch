@@ -1,0 +1,13 @@
+diff -ur DCF-1.0.0/CMakeLists.txt DCF-1.0.0/CMakeLists.txt
+--- DCF-1.0.0/CMakeLists.txt	2023-07-02 10:58:51.507604599 +0800
++++ DCF-1.0.0/CMakeLists.txt	2023-07-02 10:59:57.035726715 +0800
+@@ -93,6 +93,9 @@
+     else ()
+         add_compile_options(-msse4.2 )
+     endif ()
++    if (OS_ARCH STREQUAL "riscv64")
++       add_compile_options(-march=zihintpause)
++    endif()
+     Add_Definitions(-DWSEC_COMPILE_CAC_OPENSSL -DWSEC_AES_GCM_SUPPORT -DWSEC_USE_OPENSSL_110)
+ else ()
+     set(3rd_liblz4 "liblz4_static")
